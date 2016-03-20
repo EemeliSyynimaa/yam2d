@@ -13,10 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\scenes">
+      <UniqueIdentifier>{cefc7d27-0240-4593-a2b0-ee1630b30048}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scenes">
+      <UniqueIdentifier>{517189ad-e304-4f8c-892f-5b84782f7062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{7efcd9ec-d43d-4802-8303-5c62725b7396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{ba745943-0ca7-48c8-94b8-60871cd176c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\gamescene.cpp">
+      <Filter>Source Files\scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenemanager.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\gamescene.h">
+      <Filter>Header Files\scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\scene.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\scenemanager.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\game.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

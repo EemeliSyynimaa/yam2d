@@ -9,9 +9,10 @@
 *.log
 *.opensdf
 *.sdf
+debug_log.txt
 
 Hexout/build/*
-Hexout/Hexout/debug_log.txt
+Hexout/Hexout/obj/*
 
 engine/lib/win32_vs10/Debug/*
 engine/build/win32_vs10/obj/*
