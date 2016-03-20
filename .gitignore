@@ -7,6 +7,8 @@
 *.tlog
 *.user
 *.log
+*.opensdf
+*.sdf
 
 engine/lib/win32_vs10/Debug/*
 engine/build/win32_vs10/obj/*
@@ -14,7 +16,6 @@ engine/lib/win32_vs13/Debug/*
 engine/build/win32_vs13/obj/*
 
 Tools/TmxMapViewer/build/Debug/*
-
 
 Tutorials/1_TemplateProject/build/win32_vs10/Debug/*
 Tutorials/1_TemplateProject/build/win32_vs10/*.txt
@@ -51,6 +52,11 @@ Tutorials/8_OwnGameObjectTypes/build/win32_vs10/Debug/*
 Tutorials/8_OwnGameObjectTypes/build/win32_vs10/*.png
 Tutorials/8_OwnGameObjectTypes/build/win32_vs10/*.txt
 Tutorials/8_OwnGameObjectTypes/build/win32_vs10/*.tmx
+
+Tutorials/9_Box2DPhysics/build/win32_vs10/Debug/*
+Tutorials/9_Box2DPhysics/build/win32_vs10/*.png
+Tutorials/9_Box2DPhysics/build/win32_vs10/*.txt
+Tutorials/9_Box2DPhysics/build/win32_vs10/*.tmx
 
 ExampleGames/YA-Arkanoid/build/win32_vs10/Debug/*
 ExampleGames/YA-Arkanoid/build/win32_vs10/*.png
@@ -93,6 +99,11 @@ Tutorials/8_OwnGameObjectTypes/build/win32_vs13/Debug/*
 Tutorials/8_OwnGameObjectTypes/build/win32_vs13/*.png
 Tutorials/8_OwnGameObjectTypes/build/win32_vs13/*.txt
 Tutorials/8_OwnGameObjectTypes/build/win32_vs13/*.tmx
+
+Tutorials/9_Box2DPhysics/build/win32_vs13/Debug/*
+Tutorials/9_Box2DPhysics/build/win32_vs13/*.png
+Tutorials/9_Box2DPhysics/build/win32_vs13/*.txt
+Tutorials/9_Box2DPhysics/build/win32_vs13/*.tmx
 
 ExampleGames/YA-Arkanoid/build/win32_vs13/Debug/*
 ExampleGames/YA-Arkanoid/build/win32_vs13/*.png
