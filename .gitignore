@@ -10,6 +10,9 @@
 *.opensdf
 *.sdf
 
+Hexout/build/*
+Hexout/Hexout/debug_log.txt
+
 engine/lib/win32_vs10/Debug/*
 engine/build/win32_vs10/obj/*
 engine/lib/win32_vs13/Debug/*
