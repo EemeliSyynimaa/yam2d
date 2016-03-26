@@ -1,9 +1,8 @@
-#include "scenemanager.h"
-#include "scene.h"
+#include "core/scenemanager.h"
+#include "core/scene.h"
 
 SceneManager::SceneManager()
 {
-
 }
 
 SceneManager::~SceneManager()
@@ -14,16 +13,6 @@ SceneManager::~SceneManager()
 	}
 
 	scenes.clear();
-}
-
-void SceneManager::init()
-{
-	if(!scenes.empty()) scenes.back()->init();
-}
-
-void SceneManager::deinit()
-{
-	if(!scenes.empty()) scenes.back()->deinit();
 }
 
 void SceneManager::update(float deltaTime)

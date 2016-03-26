@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)inc;$(YAM2D_ROOT)/engine/include;$(YAM2D_ROOT)/engine/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(YAM2D_ROOT)/engine/include;$(YAM2D_ROOT)/engine/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -69,7 +69,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)inc;$(YAM2D_ROOT)/engine/include;$(YAM2D_ROOT)/engine/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(YAM2D_ROOT)/engine/include;$(YAM2D_ROOT)/engine/external;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -83,21 +83,23 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\game.cpp" />
-    <ClCompile Include="src\gamescene.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\scenemanager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\engine\build\win32_vs13\yam2d.vcxproj">
       <Project>{48cda762-fea3-4ff9-3d05-b05d6038cad6}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\game.h" />
-    <ClInclude Include="inc\gamescene.h" />
-    <ClInclude Include="inc\scene.h" />
-    <ClInclude Include="inc\scenemanager.h" />
+    <ClCompile Include="src\components\hextile.cpp" />
+    <ClCompile Include="src\core\app.cpp" />
+    <ClCompile Include="src\core\scenemanager.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\gamescene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\components\hextile.h" />
+    <ClInclude Include="src\core\app.h" />
+    <ClInclude Include="src\core\scene.h" />
+    <ClInclude Include="src\core\scenemanager.h" />
+    <ClInclude Include="src\scenes\gamescene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

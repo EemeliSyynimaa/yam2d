@@ -3,7 +3,7 @@
 #include "es_util.h"
 #include "scenemanager.h"
 
-class Game
+class App
 {
 public:
 	static void run(Scene* scene);

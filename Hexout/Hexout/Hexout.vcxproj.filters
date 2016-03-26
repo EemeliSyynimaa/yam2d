@@ -25,33 +25,45 @@
     <Filter Include="Source Files\core">
       <UniqueIdentifier>{ba745943-0ca7-48c8-94b8-60871cd176c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\components">
+      <UniqueIdentifier>{f5db6641-6045-4521-b004-6413624d73f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{0a04eed0-dccd-4032-8a3d-1e6ef11c4942}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gamescene.cpp">
+    <ClCompile Include="src\core\app.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\scenemanager.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\hextile.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\gamescene.cpp">
       <Filter>Source Files\scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scenemanager.cpp">
-      <Filter>Source Files\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\gamescene.h">
+    <ClInclude Include="src\components\hextile.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\scene.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\scenemanager.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\app.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\gamescene.h">
       <Filter>Header Files\scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\scene.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\scenemanager.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\game.h">
-      <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

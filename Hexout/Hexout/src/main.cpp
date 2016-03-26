@@ -1,9 +1,9 @@
-#include "game.h"
-#include "gamescene.h"
+#include "core/app.h"
+#include "scenes/gamescene.h"
 
 int main(int argc, char* argv[])
 {
-	Game::run(new GameScene());
+	App::run(new GameScene());
 
 	return 0;
 }
