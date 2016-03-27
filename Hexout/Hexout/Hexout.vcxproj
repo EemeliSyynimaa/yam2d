@@ -88,15 +88,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\components\hextile.cpp" />
-    <ClCompile Include="src\core\app.cpp" />
+    <ClCompile Include="src\components\hexcomponent.cpp" />
+    <ClCompile Include="src\core\game.cpp" />
+    <ClCompile Include="src\core\componentfactory.cpp" />
     <ClCompile Include="src\core\scenemanager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scenes\gamescene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\components\hextile.h" />
-    <ClInclude Include="src\core\app.h" />
+    <ClInclude Include="src\components\hexcomponent.h" />
+    <ClInclude Include="src\core\game.h" />
+    <ClInclude Include="src\core\componentfactory.h" />
     <ClInclude Include="src\core\scene.h" />
     <ClInclude Include="src\core\scenemanager.h" />
     <ClInclude Include="src\scenes\gamescene.h" />

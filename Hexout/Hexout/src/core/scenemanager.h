@@ -3,24 +3,24 @@
 #include <vector>
 
 class Scene;
+class Game;
 
 class SceneManager
 {
 public:
-	SceneManager();
+	SceneManager(Game* p_game);
 	~SceneManager();
 
-	void init();
-	void deinit();
 	void update(float deltaTime);
 	void render();
 
-	void push(Scene* scene);
+    void push(Scene* p_scene);
 	void pop();
-	void change(Scene* scene);
+    void change(Scene* p_scene);
 	
 private:
 	void clear();
 
-	std::vector<Scene*> scenes;
+	std::vector<Scene*> m_scenes;
+    Game* m_game;
 };
