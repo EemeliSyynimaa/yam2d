@@ -1,6 +1,8 @@
 #include "core/game.h"
 #include "scenes/gamescene.h"
 
+#include "Input.h"
+
 Game::Game() :
     m_sceneManager(this)
 {
@@ -27,8 +29,6 @@ bool Game::init(yam2d::ESContext* p_context)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    m_sceneManager.change(new GameScene());
-
 	return true;
 }
 
@@ -39,6 +39,11 @@ void Game::deinit()
 void Game::update(float deltaTime)
 {
     m_sceneManager.update(deltaTime);
+
+    if (yam2d::getKeyState(yam2d::KEY_ESCAPE))
+    {
+        yam2d::esQuitApp(m_context);
+    }
 }
 
 void Game::render()

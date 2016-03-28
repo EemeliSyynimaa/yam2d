@@ -8,7 +8,7 @@ bool init(yam2d::ESContext* p_context)
 {
     p_game = new Game();
     p_game->init(p_context);
-    p_game->getSceneManager()->change(new GameScene());
+    p_game->getSceneManager()->change(new GameScene(p_game));
 
     return true;
 }

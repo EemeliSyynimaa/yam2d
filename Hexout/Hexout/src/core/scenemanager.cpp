@@ -8,12 +8,7 @@ SceneManager::SceneManager(Game* p_game) :
 
 SceneManager::~SceneManager()
 {
-    for (Scene* p_scene : m_scenes)
-	{
-        delete p_scene;
-	}
-
-    m_scenes.clear();
+    clear();
 }
 
 void SceneManager::update(float deltaTime)
@@ -23,9 +18,9 @@ void SceneManager::update(float deltaTime)
 
 void SceneManager::render()
 {
-    for (Scene* p_scene : m_scenes)
+    for (Scene* i_scene : m_scenes)
 	{
-		p_scene->render();
+        i_scene->render();
 	}
 }
 
@@ -33,7 +28,6 @@ void SceneManager::push(Scene* p_scene)
 {
     if (p_scene)
 	{
-        p_scene->setGame(m_game);
         m_scenes.push_back(p_scene);
 	}
 }
@@ -43,8 +37,6 @@ void SceneManager::change(Scene* p_scene)
     if (p_scene)
     {
         clear();
-
-        p_scene->setGame(m_game);
         m_scenes.push_back(p_scene);
     }
 }
@@ -60,9 +52,9 @@ void SceneManager::pop()
 
 void SceneManager::clear()
 {
-    for (Scene* p_scene : m_scenes)
+    for (Scene* i_scene : m_scenes)
 	{
-        delete p_scene;
+        delete i_scene;
 	}
 
     m_scenes.clear();

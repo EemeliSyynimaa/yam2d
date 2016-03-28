@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\components\hexcomponent.cpp" />
+    <ClCompile Include="src\components\paddlecomponent.cpp" />
     <ClCompile Include="src\core\game.cpp" />
     <ClCompile Include="src\core\componentfactory.cpp" />
     <ClCompile Include="src\core\scenemanager.cpp" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\components\hexcomponent.h" />
+    <ClInclude Include="src\components\paddlecomponent.h" />
     <ClInclude Include="src\core\game.h" />
     <ClInclude Include="src\core\componentfactory.h" />
     <ClInclude Include="src\core\scene.h" />

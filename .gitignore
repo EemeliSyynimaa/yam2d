@@ -15,8 +15,10 @@ Hexout/build/*
 Hexout/Hexout/obj/*
 
 engine/lib/win32_vs10/Debug/*
+engine/lib/win32_vs10/Release/*
 engine/build/win32_vs10/obj/*
 engine/lib/win32_vs13/Debug/*
+engine/lib/win32_vs13/Release/*
 engine/build/win32_vs13/obj/*
 
 Tools/TmxMapViewer/build/Debug/*

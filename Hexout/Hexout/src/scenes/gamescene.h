@@ -3,23 +3,20 @@
 #include "core/scene.h"
 #include "core/componentfactory.h"
 
-#include "Sprite.h"
-#include "SpriteBatch.h"
-#include "Texture.h"
-#include "Map.h"
-
 class GameScene : public Scene
 {
 public:
-    GameScene();
+    GameScene(Game* p_game);
     ~GameScene();
 
     void update(float deltaTime);
     void render();
 
 private:
-    yam2d::TmxMap* m_map;
-    yam2d::ComponentFactory* m_componentFactory;
+    yam2d::Ref<yam2d::TmxMap> m_map;
+    yam2d::Ref<yam2d::ComponentFactory> m_componentFactory;
+    yam2d::Ref<yam2d::GameObject> m_ball;
+    yam2d::Ref<yam2d::GameObject> m_paddle;
 
     float m_zoom = 1.0f;
 };

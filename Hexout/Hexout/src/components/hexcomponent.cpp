@@ -1,7 +1,7 @@
 #include "components/hexcomponent.h"
 
-HexComponent::HexComponent(yam2d::Entity* owner, const yam2d::PropertySet& properties) :
-    Component(owner, properties)
+HexComponent::HexComponent(yam2d::GameObject* owner) :
+    Component(owner, Component::getDefaultProperties())
 {
 }
 
