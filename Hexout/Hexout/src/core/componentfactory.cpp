@@ -2,14 +2,17 @@
 #include "GameObject.h"
 #include "SpriteComponent.h"
 #include "components/paddlecomponent.h"
+#include "components/physicscomponent.h"
+#include "Box2D/Box2D.h"
 
 ComponentFactory::ComponentFactory() :
     yam2d::DefaultComponentFactory()
 {
     m_ballTexture = new yam2d::Texture("assets/textures/ball.png");
-    m_ballTexture->setTransparentColor(255, 0, 255);
-
     m_paddleTexture = new yam2d::Texture("assets/textures/paddle.png");
+	m_world = new b2World(b2Vec2(0.0f, -1.0f));
+
+	m_ballTexture->setTransparentColor(255, 0, 255);
 }
 
 yam2d::Component* ComponentFactory::createNewComponent(const std::string& type, yam2d::Entity* p_owner, const yam2d::PropertySet& properties)
@@ -39,8 +42,11 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     {
         yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
 
+		b2BodyDef b;
+
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_paddleTexture));
         p_gameObject->addComponent(new PaddleComponent(p_gameObject));
+		p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, b));
 
         return p_gameObject;
     }

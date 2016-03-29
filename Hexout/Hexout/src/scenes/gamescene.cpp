@@ -6,7 +6,6 @@
 GameScene::GameScene(Game* p_game) : 
     Scene(p_game)
 {
-
     m_map = new yam2d::TmxMap();
     m_componentFactory = new ComponentFactory();
 

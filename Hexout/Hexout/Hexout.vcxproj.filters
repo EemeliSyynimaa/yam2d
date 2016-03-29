@@ -54,6 +54,9 @@
     <ClCompile Include="src\components\paddlecomponent.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\physicscomponent.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\scene.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="src\components\paddlecomponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\physicscomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
