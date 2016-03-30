@@ -101,6 +101,7 @@
     <ClInclude Include="src\components\hexcomponent.h" />
     <ClInclude Include="src\components\paddlecomponent.h" />
     <ClInclude Include="src\components\physicscomponent.h" />
+    <ClInclude Include="src\core\b2util.h" />
     <ClInclude Include="src\core\game.h" />
     <ClInclude Include="src\core\componentfactory.h" />
     <ClInclude Include="src\core\scene.h" />

@@ -83,5 +83,8 @@
     <ClInclude Include="src\components\physicscomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\b2util.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

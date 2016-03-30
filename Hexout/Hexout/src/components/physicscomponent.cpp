@@ -1,14 +1,19 @@
 #include "components/physicscomponent.h"
 
-#include "Box2D/Box2D.h"
+#include "core/b2util.h"
 
-PhysicsComponent::PhysicsComponent(yam2d::GameObject* p_owner, b2World* p_world, const b2BodyDef& p_bodyDef) :
-	Component(p_owner, Component::getDefaultProperties())
+PhysicsComponent::PhysicsComponent(yam2d::GameObject* p_owner, b2World* p_world, b2Body* p_body) :
+	Component(p_owner, Component::getDefaultProperties()), m_world(p_world), m_body(p_body)
 {
-	m_body = p_world->CreateBody(&p_bodyDef);
+}
+
+PhysicsComponent::~PhysicsComponent()
+{
+	m_world->DestroyBody(m_body);
 }
 
 void PhysicsComponent::update(float deltaTime)
 {
-
+	getGameObject()->setPosition(box2DToWorld(m_body->GetPosition()));
+	getGameObject()->setRotation(m_body->GetAngle());
 }

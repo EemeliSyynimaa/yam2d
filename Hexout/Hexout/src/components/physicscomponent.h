@@ -1,15 +1,13 @@
 #pragma once
 
 #include "GameObject.h"
-
-class b2World;
-class b2Body;
-struct b2BodyDef;
+#include "Box2D/Box2D.h"
 
 class PhysicsComponent : public yam2d::Component, public yam2d::Updatable
 {
 public:
-	PhysicsComponent(yam2d::GameObject* p_owner, b2World* p_world, const b2BodyDef& p_bodyDef);
+	PhysicsComponent(yam2d::GameObject* p_owner, b2World* p_world, b2Body* p_body);
+	~PhysicsComponent();
 
 	void update(float deltaTime);
 
@@ -18,4 +16,5 @@ public:
 private:
 
 	b2Body* m_body;
+	yam2d::Ref<b2World> m_world;
 };

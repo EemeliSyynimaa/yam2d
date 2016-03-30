@@ -3,11 +3,17 @@
 #include "Camera.h"
 #include "Layer.h"
 
+#include "core/b2util.h"
+#include "Box2D/Box2D.h"
+
 GameScene::GameScene(Game* p_game) : 
     Scene(p_game)
 {
+	m_world = new b2World(worldToBox2D(0.0f, 0.0f));
+
     m_map = new yam2d::TmxMap();
     m_componentFactory = new ComponentFactory();
+	m_componentFactory->setWorld(m_world);
 
     m_map->loadMapFile("assets/levels/testi.tmx", m_componentFactory);
     m_map->getCamera()->setPosition(yam2d::vec2(m_map->getWidth() / 2.0f - 0.5f, m_map->getHeight() / 2.0f - 0.5f));
@@ -25,6 +31,7 @@ GameScene::~GameScene()
 
 void GameScene::update(float deltaTime)
 {
+	m_world->Step(1 / 20.0f, 8, 3);
     m_map->update(deltaTime);
 }
 

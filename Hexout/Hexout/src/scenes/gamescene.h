@@ -3,7 +3,7 @@
 #include "core/scene.h"
 #include "core/componentfactory.h"
 
-#include "Box2D/Box2D.h"
+class b2World;
 
 class GameScene : public Scene
 {
@@ -21,5 +21,5 @@ private:
     yam2d::Ref<yam2d::GameObject> m_paddle;
 
     float m_zoom = 1.0f;
-
+	yam2d::Ref<b2World> m_world;
 };
