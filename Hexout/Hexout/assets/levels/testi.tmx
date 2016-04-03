@@ -1,55 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="hexagonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="28" hexsidelength="16" staggeraxis="x" staggerindex="odd" nextobjectid="72">
- <tileset firstgid="1" name="Tiles" tilewidth="32" tileheight="28" tilecount="4" columns="4">
-  <image source="../textures/tiles.png" trans="ff00ff" width="128" height="28"/>
+<map version="1.0" orientation="hexagonal" renderorder="right-down" width="11" height="11" tilewidth="32" tileheight="28" hexsidelength="16" staggeraxis="x" staggerindex="odd" nextobjectid="77">
+ <tileset firstgid="1" name="Tiles" tilewidth="32" tileheight="28" tilecount="5" columns="5">
+  <image source="../textures/tiles.png" trans="ff00ff" width="160" height="28"/>
  </tileset>
  <objectgroup name="GameObjects">
-  <object id="1" type="HexTile" gid="1" x="48" y="140" width="32" height="28"/>
-  <object id="2" type="HexTile" gid="1" x="48" y="112" width="32" height="28"/>
-  <object id="3" type="HexTile" gid="1" x="72" y="98" width="32" height="28"/>
-  <object id="4" type="HexTile" gid="1" x="96" y="112" width="32" height="28"/>
-  <object id="5" type="HexTile" gid="1" x="120" y="126" width="32" height="28"/>
-  <object id="6" type="HexTile" gid="1" x="144" y="112" width="32" height="28"/>
-  <object id="7" type="HexTile" gid="1" x="168" y="98" width="32" height="28"/>
-  <object id="8" type="HexTile" gid="1" x="192" y="112" width="32" height="28"/>
-  <object id="9" type="HexTile" gid="1" x="192" y="140" width="32" height="28"/>
-  <object id="10" type="HexTile" gid="1" x="168" y="154" width="32" height="28"/>
-  <object id="11" type="HexTile" gid="1" x="72" y="154" width="32" height="28"/>
-  <object id="12" type="HexTile" gid="2" x="72" y="126" width="32" height="28"/>
-  <object id="13" type="HexTile" gid="2" x="168" y="126" width="32" height="28"/>
-  <object id="14" type="HexTile" gid="3" x="96" y="140" width="32" height="28"/>
-  <object id="18" type="HexTile" gid="3" x="144" y="140" width="32" height="28"/>
-  <object id="19" type="HexTile" gid="3" x="120" y="154" width="32" height="28"/>
-  <object id="20" type="HexTile" gid="4" x="96" y="168" width="32" height="28"/>
-  <object id="21" type="HexTile" gid="4" x="120" y="182" width="32" height="28"/>
-  <object id="22" type="HexTile" gid="4" x="144" y="168" width="32" height="28"/>
-  <object id="24" type="HexTile" gid="4" x="120" y="210" width="32" height="28"/>
-  <object id="25" type="HexTile" gid="4" x="120" y="238" width="32" height="28"/>
-  <object id="26" type="HexTile" gid="4" x="72" y="238" width="32" height="28"/>
-  <object id="27" type="HexTile" gid="4" x="96" y="252" width="32" height="28"/>
-  <object id="28" type="HexTile" gid="4" x="120" y="266" width="32" height="28"/>
-  <object id="29" type="HexTile" gid="4" x="144" y="252" width="32" height="28"/>
-  <object id="30" type="HexTile" gid="4" x="168" y="238" width="32" height="28"/>
-  <object id="32" type="HexTile" gid="2" x="144" y="196" width="32" height="28"/>
-  <object id="33" type="HexTile" gid="2" x="144" y="224" width="32" height="28"/>
-  <object id="34" type="HexTile" gid="2" x="96" y="224" width="32" height="28"/>
-  <object id="35" type="HexTile" gid="2" x="96" y="196" width="32" height="28"/>
-  <object id="36" type="HexTile" gid="1" x="72" y="210" width="32" height="28"/>
-  <object id="37" type="HexTile" gid="1" x="48" y="224" width="32" height="28"/>
-  <object id="38" type="HexTile" gid="1" x="48" y="252" width="32" height="28"/>
-  <object id="39" type="HexTile" gid="1" x="168" y="210" width="32" height="28"/>
-  <object id="40" type="HexTile" gid="1" x="192" y="224" width="32" height="28"/>
-  <object id="41" type="HexTile" gid="1" x="192" y="252" width="32" height="28"/>
-  <object id="43" type="HexTile" gid="3" x="72" y="266" width="32" height="28"/>
-  <object id="44" type="HexTile" gid="3" x="96" y="280" width="32" height="28"/>
-  <object id="45" type="HexTile" gid="3" x="120" y="294" width="32" height="28"/>
-  <object id="46" type="HexTile" gid="3" x="144" y="280" width="32" height="28"/>
-  <object id="47" type="HexTile" gid="3" x="168" y="266" width="32" height="28"/>
-  <object id="63" type="HexTile" gid="4" x="120" y="42" width="32" height="28"/>
-  <object id="65" type="HexTile" gid="3" x="96" y="56" width="32" height="28"/>
-  <object id="66" type="HexTile" gid="3" x="144" y="56" width="32" height="28"/>
-  <object id="67" type="HexTile" gid="2" x="168" y="42" width="32" height="28"/>
-  <object id="69" type="HexTile" gid="2" x="72" y="42" width="32" height="28"/>
-  <object id="71" type="HexTile" gid="1" x="120" y="70" width="32" height="28"/>
+  <object id="4" type="HexTile" gid="1" x="120" y="126" width="32" height="28"/>
+  <object id="5" type="HexTile" gid="1" x="168" y="182" width="32" height="28"/>
+  <object id="6" type="HexTile" gid="1" x="120" y="238" width="32" height="28"/>
+  <object id="7" type="HexTile" gid="1" x="72" y="182" width="32" height="28"/>
+  <object id="8" type="HexTile" gid="3" x="72" y="210" width="32" height="28"/>
+  <object id="9" type="HexTile" gid="3" x="96" y="224" width="32" height="28"/>
+  <object id="10" type="HexTile" gid="3" x="72" y="154" width="32" height="28"/>
+  <object id="11" type="HexTile" gid="3" x="96" y="140" width="32" height="28"/>
+  <object id="13" type="HexTile" gid="3" x="144" y="140" width="32" height="28"/>
+  <object id="15" type="HexTile" gid="3" x="168" y="154" width="32" height="28"/>
+  <object id="16" type="HexTile" gid="3" x="168" y="210" width="32" height="28"/>
+  <object id="17" type="HexTile" gid="3" x="144" y="224" width="32" height="28"/>
+  <object id="18" type="HexTile" gid="2" x="96" y="196" width="32" height="28"/>
+  <object id="19" type="HexTile" gid="2" x="120" y="210" width="32" height="28"/>
+  <object id="20" type="HexTile" gid="2" x="144" y="196" width="32" height="28"/>
+  <object id="21" type="HexTile" gid="2" x="144" y="168" width="32" height="28"/>
+  <object id="22" type="HexTile" gid="2" x="120" y="154" width="32" height="28"/>
+  <object id="23" type="HexTile" gid="2" x="96" y="168" width="32" height="28"/>
+  <object id="24" type="HexTile" gid="4" x="120" y="266" width="32" height="28"/>
+  <object id="25" type="HexTile" gid="4" x="144" y="252" width="32" height="28"/>
+  <object id="26" type="HexTile" gid="4" x="168" y="238" width="32" height="28"/>
+  <object id="27" type="HexTile" gid="4" x="192" y="224" width="32" height="28"/>
+  <object id="28" type="HexTile" gid="4" x="120" y="98" width="32" height="28"/>
+  <object id="29" type="HexTile" gid="4" x="96" y="112" width="32" height="28"/>
+  <object id="30" type="HexTile" gid="4" x="72" y="126" width="32" height="28"/>
+  <object id="31" type="HexTile" gid="4" x="48" y="140" width="32" height="28"/>
+  <object id="32" type="HexTile" gid="4" x="48" y="168" width="32" height="28"/>
+  <object id="33" type="HexTile" gid="4" x="48" y="196" width="32" height="28"/>
+  <object id="34" type="HexTile" gid="4" x="48" y="224" width="32" height="28"/>
+  <object id="35" type="HexTile" gid="4" x="72" y="238" width="32" height="28"/>
+  <object id="37" type="HexTile" gid="4" x="96" y="252" width="32" height="28"/>
+  <object id="38" type="HexTile" gid="4" x="192" y="196" width="32" height="28"/>
+  <object id="40" type="HexTile" gid="4" x="192" y="168" width="32" height="28"/>
+  <object id="41" type="HexTile" gid="4" x="192" y="140" width="32" height="28"/>
+  <object id="42" type="HexTile" gid="4" x="168" y="126" width="32" height="28"/>
+  <object id="43" type="HexTile" gid="4" x="144" y="112" width="32" height="28"/>
+  <object id="44" type="HexTile" gid="1" x="96" y="84" width="32" height="28"/>
+  <object id="45" type="HexTile" gid="1" x="120" y="70" width="32" height="28"/>
+  <object id="46" type="HexTile" gid="1" x="144" y="84" width="32" height="28"/>
+  <object id="55" type="HexTile" gid="1" x="96" y="280" width="32" height="28"/>
+  <object id="56" type="HexTile" gid="1" x="120" y="294" width="32" height="28"/>
+  <object id="57" type="HexTile" gid="1" x="144" y="280" width="32" height="28"/>
+  <object id="58" type="HexTile" gid="2" x="216" y="210" width="32" height="28"/>
+  <object id="59" type="HexTile" gid="2" x="216" y="238" width="32" height="28"/>
+  <object id="60" type="HexTile" gid="2" x="192" y="252" width="32" height="28"/>
+  <object id="61" type="HexTile" gid="2" x="24" y="210" width="32" height="28"/>
+  <object id="64" type="HexTile" gid="2" x="24" y="238" width="32" height="28"/>
+  <object id="66" type="HexTile" gid="2" x="48" y="252" width="32" height="28"/>
+  <object id="68" type="HexTile" gid="3" x="192" y="112" width="32" height="28"/>
+  <object id="69" type="HexTile" gid="3" x="216" y="126" width="32" height="28"/>
+  <object id="70" type="HexTile" gid="3" x="216" y="154" width="32" height="28"/>
+  <object id="71" type="HexTile" gid="3" x="48" y="112" width="32" height="28"/>
+  <object id="72" type="HexTile" gid="3" x="24" y="126" width="32" height="28"/>
+  <object id="73" type="HexTile" gid="3" x="24" y="154" width="32" height="28"/>
+  <object id="75" name="origin" type="HexTile" gid="5" x="120" y="182" width="32" height="28"/>
  </objectgroup>
 </map>

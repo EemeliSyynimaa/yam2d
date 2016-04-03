@@ -2,6 +2,7 @@
 
 #include "core/scene.h"
 #include "core/componentfactory.h"
+#include "core/collisionhandler.h"
 
 class b2World;
 
@@ -19,6 +20,7 @@ private:
     yam2d::Ref<ComponentFactory> m_componentFactory;
     yam2d::Ref<yam2d::GameObject> m_ball;
     yam2d::Ref<yam2d::GameObject> m_paddle;
+    yam2d::Ref<CollisionHandler> m_collisionHandler;
 
     float m_zoom = 1.0f;
 	yam2d::Ref<b2World> m_world;

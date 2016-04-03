@@ -57,6 +57,9 @@
     <ClCompile Include="src\components\physicscomponent.cpp">
       <Filter>Source Files\components</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\collisionhandler.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\scene.h">
@@ -83,7 +86,7 @@
     <ClInclude Include="src\components\physicscomponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="src\core\b2util.h">
+    <ClInclude Include="src\core\collisionhandler.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
   </ItemGroup>

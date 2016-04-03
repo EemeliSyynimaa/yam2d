@@ -1,6 +1,6 @@
 #include "components/physicscomponent.h"
 
-#include "core/b2util.h"
+#include <iostream>
 
 PhysicsComponent::PhysicsComponent(yam2d::GameObject* p_owner, b2World* p_world, b2Body* p_body) :
 	Component(p_owner, Component::getDefaultProperties()), m_world(p_world), m_body(p_body)
@@ -14,6 +14,9 @@ PhysicsComponent::~PhysicsComponent()
 
 void PhysicsComponent::update(float deltaTime)
 {
-	getGameObject()->setPosition(box2DToWorld(m_body->GetPosition()));
-	getGameObject()->setRotation(m_body->GetAngle());
+    if (m_body->GetType() != b2_staticBody)
+    {
+        getGameObject()->setPosition(m_body->GetTransform().p.x, m_body->GetTransform().p.y);
+        getGameObject()->setRotation(m_body->GetTransform().q.GetAngle());
+    }
 }

@@ -11,6 +11,8 @@ public:
 
 	void update(float deltaTime);
 
+    b2Body* getBody() { return m_body; }
+
 	yam2d::GameObject* getGameObject() { return static_cast<yam2d::GameObject*>(getOwner()); }
 	const yam2d::GameObject* getGameObject() const { return static_cast<const yam2d::GameObject*>(getOwner()); }
 private:
