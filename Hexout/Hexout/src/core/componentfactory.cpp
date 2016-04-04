@@ -31,10 +31,11 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 {
     if (type == "HexTile")
     {
-        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(p_parent, properties);
+        yam2d::GameObject* p_gameObject = new yam2d::GameObject(p_parent, properties);
 
+        std::cout << p_gameObject->getRefCount() << ", ";
         p_gameObject->addComponent(p_componentFactory->createNewComponent("Tile", p_gameObject, properties));
-
+        std::cout << p_gameObject->getRefCount() << ", ";
 		b2BodyDef b;
 		b.type = b2_staticBody;
 		b.position = p_gameObject->getPosition();
@@ -64,13 +65,13 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 
 		p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
 
-        m_map->getLayer("GameObjects")->addGameObject(p_gameObject);
+        std::cout << p_gameObject->getRefCount() << std::endl;
 
         return p_gameObject;
     }
     else if (type == "Ball")
     {
-        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(nullptr, 0);
+        yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_ballTexture));
@@ -106,7 +107,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     }
     else if (type == "Paddle")
     {
-        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(nullptr, 0);
+        yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_paddleTexture));

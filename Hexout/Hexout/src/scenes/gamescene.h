@@ -26,7 +26,8 @@ private:
 	size_t m_score = 0;
 
     float m_zoom = 1.0f;
-	float m_speed = 128.0f;
+	float m_speed = 192.0f;
+    float m_step = 1.0f / 20.0f;
 	
 	yam2d::Ref<b2World> m_world;
 };

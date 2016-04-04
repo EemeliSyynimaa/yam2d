@@ -45,14 +45,13 @@ GameScene::~GameScene()
 
 void GameScene::update(float deltaTime)
 {
-	m_world->Step(1 / 20.0f, 8, 3);
-    
+	m_world->Step(m_step, 8, 3);
 
 	int deadObjects = m_collisionHandler->deleteDeadObjects();
     
 	if (deadObjects > 0)
 	{
-		m_speed += deadObjects * 4.0f;
+		m_speed += deadObjects * 2.0f;
 		m_score += deadObjects * 100;
 		m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: " +  std::to_string(m_score));
 	}
