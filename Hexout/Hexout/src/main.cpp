@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 {
     yam2d::ESContext context;
     yam2d::esInitContext(&context);
-    yam2d::esCreateWindow(&context, "Hexout", 1280, 720, yam2d::ES_WINDOW_DEFAULT);
+    yam2d::esCreateWindow(&context, "Hexout", 720, 720, yam2d::ES_WINDOW_DEFAULT);
 
     yam2d::esRegisterInitFunc(&context, init);
     yam2d::esRegisterDeinitFunc(&context, deinit);

@@ -14,7 +14,7 @@ public:
     void EndContact(b2Contact* contact);
 
     void setMap(yam2d::TmxMap* map) { m_map = map; }
-    void deleteDeadObjects();
+    size_t deleteDeadObjects();
 private:
     void handleCollision(yam2d::GameObject* a, yam2d::GameObject* b);
 

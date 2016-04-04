@@ -23,7 +23,7 @@ void PaddleComponent::setOrigin(const yam2d::vec2& position)
 void PaddleComponent::update(float deltaTime)
 {
     b2Vec2 position;
-    position.x = yam2d::getMouseAxisX() - 640.0f;
+    position.x = yam2d::getMouseAxisX() - 360.0f;
     position.y = yam2d::getMouseAxisY() - 360.0f;
 
     if (position.Length() > 0)

@@ -4,6 +4,8 @@
 
 #include "GameObject.h"
 #include "SpriteComponent.h"
+#include "TextComponent.h"
+#include "SpriteSheet.h"
 
 #include "Layer.h"
 
@@ -14,6 +16,8 @@ ComponentFactory::ComponentFactory() :
 {
     m_ballTexture = new yam2d::Texture("assets/textures/ball.png");
     m_paddleTexture = new yam2d::Texture("assets/textures/paddle.png");
+	m_fontTexture = new yam2d::Texture("assets/textures/Fixedsys_24_Bold.png");
+	m_font = yam2d::SpriteSheet::autoFindFontFromTexture(m_fontTexture, "assets/fonts/Fixedsys_24_Bold.dat");
 
 	m_ballTexture->setTransparentColor(255, 0, 255);
 }
@@ -27,7 +31,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 {
     if (type == "HexTile")
     {
-        yam2d::GameObject* p_gameObject = new yam2d::GameObject(p_parent, properties);
+        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(p_parent, properties);
 
         p_gameObject->addComponent(p_componentFactory->createNewComponent("Tile", p_gameObject, properties));
 
@@ -54,7 +58,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         fixture.shape = &shape;
         fixture.density = 1;
         fixture.restitution = 1.0f;
-        fixture.friction = 0.0f;
+		fixture.friction = 1.0f;
         p_body->CreateFixture(&fixture);
         p_body->SetUserData(p_gameObject);
 
@@ -66,15 +70,17 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     }
     else if (type == "Ball")
     {
-        yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
+        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(nullptr, 0);
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_ballTexture));
 
+		p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
+
         b2BodyDef b;
         b.type = b2_dynamicBody;
         b.bullet = true;
-        b.fixedRotation = true;
+		b.fixedRotation = true;
 
         b2Body* p_body = m_world->CreateBody(&b);
 
@@ -85,7 +91,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         fixture.shape = &shape;
         fixture.density = 1.0f;
         fixture.restitution = 1.0f;
-        fixture.friction = 0.0f;
+        fixture.friction = 1.0f;
 
         p_body->CreateFixture(&fixture);
         p_body->SetTransform(b2Vec2(8.0f, m_map->getHeight() / 2.0f), 0.0f);
@@ -100,11 +106,13 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     }
     else if (type == "Paddle")
     {
-        yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
+        yam2d::Ref<yam2d::GameObject> p_gameObject = new yam2d::GameObject(nullptr, 0);
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_paddleTexture));
         p_gameObject->addComponent(new PaddleComponent(p_gameObject));
+
+		p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
 
 		b2BodyDef b;
 		b.type = b2_kinematicBody;
@@ -120,7 +128,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         fixture.shape = &shape;
         fixture.density = 1;
         fixture.restitution = 1.0f;
-        fixture.friction = 0.0f;
+		fixture.friction = 1.0f;
         p_body->CreateFixture(&fixture);
         p_body->SetTransform(b2Vec2(2.5f, -8.0f), 0.0f);
         p_body->SetUserData(p_gameObject);
@@ -137,6 +145,17 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 
         return p_gameObject;
     }
+	else if (type == "Label")
+	{
+		yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
+		p_gameObject->setType(type);
+
+		p_gameObject->addComponent(new yam2d::TextComponent(p_gameObject, m_font));
+
+		m_map->getLayer("GameObjects")->addGameObject(p_gameObject);
+
+		return p_gameObject;
+	}
 
     return yam2d::DefaultComponentFactory::createNewEntity(p_componentFactory, type, p_parent, properties);
 }

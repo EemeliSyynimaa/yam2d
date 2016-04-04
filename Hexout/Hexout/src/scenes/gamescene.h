@@ -20,8 +20,13 @@ private:
     yam2d::Ref<ComponentFactory> m_componentFactory;
     yam2d::Ref<yam2d::GameObject> m_ball;
     yam2d::Ref<yam2d::GameObject> m_paddle;
+	yam2d::Ref<yam2d::GameObject> m_scoreLabel;
     yam2d::Ref<CollisionHandler> m_collisionHandler;
 
+	size_t m_score = 0;
+
     float m_zoom = 1.0f;
+	float m_speed = 128.0f;
+	
 	yam2d::Ref<b2World> m_world;
 };

@@ -3,6 +3,10 @@
  <tileset firstgid="1" name="Tiles" tilewidth="32" tileheight="28" tilecount="5" columns="5">
   <image source="../textures/tiles.png" trans="ff00ff" width="160" height="28"/>
  </tileset>
+ <tileset firstgid="6" name="Background" tilewidth="720" tileheight="720" tilecount="1" columns="1">
+  <tileoffset x="-360" y="360"/>
+  <image source="../textures/background.png" width="720" height="720"/>
+ </tileset>
  <objectgroup name="GameObjects">
   <object id="4" type="HexTile" gid="1" x="120" y="126" width="32" height="28"/>
   <object id="5" type="HexTile" gid="1" x="168" y="182" width="32" height="28"/>

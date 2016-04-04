@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Layer.h"
 #include "Input.h"
+#include "TextComponent.h"
 
 #include "components/physicscomponent.h"
 #include "Box2D/Box2D.h"
@@ -31,6 +32,11 @@ GameScene::GameScene(Game* p_game) :
 
     m_ball = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Ball", nullptr, yam2d::PropertySet()));
     m_paddle = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Paddle", nullptr, yam2d::PropertySet()));
+	m_scoreLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
+
+	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: 0");
+	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
+	m_scoreLabel->setPosition(origin.x, -5.0f);
 }
 
 GameScene::~GameScene()
@@ -40,17 +46,25 @@ GameScene::~GameScene()
 void GameScene::update(float deltaTime)
 {
 	m_world->Step(1 / 20.0f, 8, 3);
-    m_map->update(deltaTime);
+    
 
-    m_collisionHandler->deleteDeadObjects();
+	int deadObjects = m_collisionHandler->deleteDeadObjects();
+    
+	if (deadObjects > 0)
+	{
+		m_speed += deadObjects * 4.0f;
+		m_score += deadObjects * 100;
+		m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: " +  std::to_string(m_score));
+	}
 
-    //b2Vec2 direction = m_ball->getComponent<PhysicsComponent>()->getBody()->GetLinearVelocity();
-    //direction.Normalize();
+    b2Vec2 direction = m_ball->getComponent<PhysicsComponent>()->getBody()->GetLinearVelocity();
+    direction.Normalize();
 
-    //static float speed = 128.0f;
-    //b2Vec2 velocity = speed * deltaTime * direction;
+    b2Vec2 velocity = m_speed * deltaTime * direction;
 
-    //m_ball->getComponent<PhysicsComponent>()->getBody()->SetLinearVelocity(velocity);
+    m_ball->getComponent<PhysicsComponent>()->getBody()->SetLinearVelocity(velocity);
+
+	m_map->update(deltaTime);
 }
 
 void GameScene::render()

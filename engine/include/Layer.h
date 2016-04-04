@@ -95,12 +95,17 @@ public:
 
 	/** Returns true, if this layer is visible. i.e. needed to be rendered. Typically this method is not needed to be called by game developer. */
 	bool isVisible() const;
+
+	void setVisible(bool visible);
 		
 	/** Returns map of this Layer. */
 	Map* getMap() const;
 
 	/** Returns opacity of this layer */
 	float getOpacity() const;
+
+
+	void setOpacity(float v);
 
 	/** Returns depth value of this layer */
 	float getDepth() const;
@@ -114,6 +119,7 @@ public:
 
 	GameObject* pick(const vec2& pos) const;
 
+	void reserve(size_t s) { m_gameObjects.reserve(s);  }
 private:
 	//Map*							m_map;
 	std::string						m_name;
