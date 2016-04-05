@@ -60,6 +60,9 @@
     <ClCompile Include="src\core\collisionhandler.cpp">
       <Filter>Source Files\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\ballcomponent.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\scene.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="src\core\collisionhandler.h">
       <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\ballcomponent.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

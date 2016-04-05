@@ -10,14 +10,9 @@
 
 #include <iostream>
 
-PaddleComponent::PaddleComponent(yam2d::GameObject* p_owner) :
-Component(p_owner, Component::getDefaultProperties()), m_speed(0.75f), m_origin(0.0f, 0.0f), m_radius(8.0f), m_angle(0.0f), m_moved(true)
+PaddleComponent::PaddleComponent(yam2d::GameObject* p_owner, const yam2d::vec2& origin) :
+Component(p_owner, Component::getDefaultProperties()), m_speed(0.75f), m_origin(origin), m_radius(8.0f), m_angle(0.0f), m_moved(true)
 {
-}
-
-void PaddleComponent::setOrigin(const yam2d::vec2& position)
-{
-    m_origin = position;
 }
 
 void PaddleComponent::setScreenSize(int x, int y)
@@ -40,7 +35,6 @@ void PaddleComponent::update(float deltaTime)
     }
      
     position.Normalize();
-    position = m_radius * position + m_origin;
 
-    getGameObject()->getComponent<PhysicsComponent>()->getBody()->SetTransform(position, m_angle);
+    getGameObject()->getComponent<PhysicsComponent>()->getBody()->SetTransform(m_radius * position + m_origin, m_angle);
 }

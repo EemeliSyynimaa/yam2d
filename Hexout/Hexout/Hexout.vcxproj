@@ -88,6 +88,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\components\ballcomponent.cpp" />
     <ClCompile Include="src\components\hexcomponent.cpp" />
     <ClCompile Include="src\components\paddlecomponent.cpp" />
     <ClCompile Include="src\components\physicscomponent.cpp" />
@@ -99,6 +100,7 @@
     <ClCompile Include="src\scenes\gamescene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\components\ballcomponent.h" />
     <ClInclude Include="src\components\hexcomponent.h" />
     <ClInclude Include="src\components\paddlecomponent.h" />
     <ClInclude Include="src\components\physicscomponent.h" />

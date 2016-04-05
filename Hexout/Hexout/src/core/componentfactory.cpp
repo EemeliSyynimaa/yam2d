@@ -1,6 +1,7 @@
 #include "core/componentfactory.h"
 #include "components/paddlecomponent.h"
 #include "components/physicscomponent.h"
+#include "components/ballcomponent.h"
 
 #include "GameObject.h"
 #include "SpriteComponent.h"
@@ -8,8 +9,6 @@
 #include "SpriteSheet.h"
 
 #include "Layer.h"
-
-#include <iostream>
 
 ComponentFactory::ComponentFactory() :
     yam2d::DefaultComponentFactory()
@@ -33,9 +32,8 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     {
         yam2d::GameObject* p_gameObject = new yam2d::GameObject(p_parent, properties);
 
-        std::cout << p_gameObject->getRefCount() << ", ";
         p_gameObject->addComponent(p_componentFactory->createNewComponent("Tile", p_gameObject, properties));
-        std::cout << p_gameObject->getRefCount() << ", ";
+
 		b2BodyDef b;
 		b.type = b2_staticBody;
 		b.position = p_gameObject->getPosition();
@@ -64,8 +62,6 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_body->SetUserData(p_gameObject);
 
 		p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
-
-        std::cout << p_gameObject->getRefCount() << std::endl;
 
         return p_gameObject;
     }
@@ -99,6 +95,8 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_body->SetUserData(p_gameObject);
 
         p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
+        p_gameObject->addComponent(new BallComponent(p_gameObject, 
+            m_map->findGameObjectByName("origin")->getPosition()));
 
         m_map->getLayer("GameObjects")->addGameObject(p_gameObject);
 
@@ -110,7 +108,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_paddleTexture));
-        p_gameObject->addComponent(new PaddleComponent(p_gameObject));
+        p_gameObject->addComponent(new PaddleComponent(p_gameObject, m_map->findGameObjectByName("origin")->getPosition()));
 
 		p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
 
@@ -134,12 +132,6 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_body->SetUserData(p_gameObject);
         
 		p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
-
-        // Lets find the origin tile!
-
-        yam2d::GameObject* p_origin = m_map->findGameObjectByName("origin");
-
-        p_gameObject->getComponent<PaddleComponent>()->setOrigin(p_origin->getPosition());
 
         m_map->getLayer("GameObjects")->addGameObject(p_gameObject);
 

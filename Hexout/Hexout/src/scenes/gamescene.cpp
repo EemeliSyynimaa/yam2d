@@ -7,6 +7,7 @@
 
 #include "components/physicscomponent.h"
 #include "components/paddlecomponent.h"
+#include "components/ballcomponent.h"
 #include "Box2D/Box2D.h"
 
 #include <iostream>
@@ -26,20 +27,15 @@ GameScene::GameScene(Game* p_game) :
     m_world->SetContactListener(m_collisionHandler);
 
     m_map->loadMapFile("assets/levels/testi.tmx", m_componentFactory);
+    m_map->getCamera()->setPosition(m_map->findGameObjectByName("origin")->getPosition());
 
-    yam2d::vec2 origin = m_map->findGameObjectByName("origin")->getPosition();
-
-    m_map->getCamera()->setPosition(origin);
-
-    m_ball = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Ball", nullptr, yam2d::PropertySet()));
     m_paddle = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Paddle", nullptr, yam2d::PropertySet()));
+    m_ball = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Ball", nullptr, yam2d::PropertySet()));
 	m_scoreLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
 
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: 0");
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
-	m_scoreLabel->setPosition(origin.x, -5.0f);
-
-    
+    m_scoreLabel->setPosition(m_map->findGameObjectByName("origin")->getPosition().x, -5.0f);
 }
 
 GameScene::~GameScene()
@@ -49,31 +45,19 @@ GameScene::~GameScene()
 void GameScene::update(float deltaTime)
 {
 	m_world->Step(m_step, 8, 3);
+    m_map->update(deltaTime);
 
 	int deadObjects = m_collisionHandler->deleteDeadObjects();
     
 	if (deadObjects > 0)
 	{
-		m_speed += deadObjects * 2.0f;
+        m_ball->getComponent<BallComponent>()->speedUp(deadObjects * 2.0f);
 		m_score += deadObjects * 100;
 		m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: " +  std::to_string(m_score));
 	}
 
-    b2Vec2 direction = m_ball->getComponent<PhysicsComponent>()->getBody()->GetLinearVelocity();
-    direction.Normalize();
-
-    b2Vec2 velocity = m_speed * deltaTime * direction;
-
-    m_ball->getComponent<PhysicsComponent>()->getBody()->SetLinearVelocity(velocity);
-
     m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
-
-    if (yam2d::isMouseButtonPressed(yam2d::MOUSE_LEFT))
-    {
-        m_ball->getComponent<PhysicsComponent>()->getBody()->ApplyForceToCenter(b2Vec2(-5.0f, 0.0f));
-    }
-
-	m_map->update(deltaTime);
+    m_ball->getComponent<BallComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
 }
 
 void GameScene::render()
