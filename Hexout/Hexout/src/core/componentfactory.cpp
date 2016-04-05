@@ -98,7 +98,6 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_body->SetTransform(b2Vec2(8.0f, m_map->getHeight() / 2.0f), 0.0f);
         p_body->SetUserData(p_gameObject);
 
-        p_body->ApplyForceToCenter(b2Vec2(-5.0f, 0.0f));
         p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
 
         m_map->getLayer("GameObjects")->addGameObject(p_gameObject);

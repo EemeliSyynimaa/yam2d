@@ -6,6 +6,7 @@
 #include "TextComponent.h"
 
 #include "components/physicscomponent.h"
+#include "components/paddlecomponent.h"
 #include "Box2D/Box2D.h"
 
 #include <iostream>
@@ -37,6 +38,8 @@ GameScene::GameScene(Game* p_game) :
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: 0");
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
 	m_scoreLabel->setPosition(origin.x, -5.0f);
+
+    
 }
 
 GameScene::~GameScene()
@@ -62,6 +65,8 @@ void GameScene::update(float deltaTime)
     b2Vec2 velocity = m_speed * deltaTime * direction;
 
     m_ball->getComponent<PhysicsComponent>()->getBody()->SetLinearVelocity(velocity);
+
+    m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
 
 	m_map->update(deltaTime);
 }
