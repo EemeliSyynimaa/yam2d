@@ -68,6 +68,11 @@ void GameScene::update(float deltaTime)
 
     m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
 
+    if (yam2d::isMouseButtonPressed(yam2d::MOUSE_LEFT))
+    {
+        m_ball->getComponent<PhysicsComponent>()->getBody()->ApplyForceToCenter(b2Vec2(-5.0f, 0.0f));
+    }
+
 	m_map->update(deltaTime);
 }
 
