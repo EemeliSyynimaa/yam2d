@@ -10,14 +10,15 @@
 
 #include "Layer.h"
 
-ComponentFactory::ComponentFactory() :
-    yam2d::DefaultComponentFactory()
+ComponentFactory::ComponentFactory(b2World* p_world, yam2d::TmxMap* p_map) :
+    yam2d::DefaultComponentFactory(),
+    m_ballTexture(new yam2d::Texture("assets/textures/ball.png")),
+    m_paddleTexture(new yam2d::Texture("assets/textures/paddle.png")),
+    m_fontTexture(new yam2d::Texture("assets/textures/Fixedsys_24_Bold.png")),
+    m_font(yam2d::SpriteSheet::autoFindFontFromTexture(m_fontTexture, "assets/fonts/Fixedsys_24_Bold.dat")),
+    m_world(p_world),
+    m_map(p_map)
 {
-    m_ballTexture = new yam2d::Texture("assets/textures/ball.png");
-    m_paddleTexture = new yam2d::Texture("assets/textures/paddle.png");
-	m_fontTexture = new yam2d::Texture("assets/textures/Fixedsys_24_Bold.png");
-	m_font = yam2d::SpriteSheet::autoFindFontFromTexture(m_fontTexture, "assets/fonts/Fixedsys_24_Bold.dat");
-
 	m_ballTexture->setTransparentColor(255, 0, 255);
 }
 
@@ -75,7 +76,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 		p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
 
         b2BodyDef b;
-        b.type = b2_dynamicBody;
+        b.type = b2_kinematicBody;
         b.bullet = true;
 		b.fixedRotation = true;
 
@@ -95,8 +96,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_body->SetUserData(p_gameObject);
 
         p_gameObject->addComponent(new PhysicsComponent(p_gameObject, m_world, p_body));
-        p_gameObject->addComponent(new BallComponent(p_gameObject, 
-            m_map->findGameObjectByName("origin")->getPosition()));
+        p_gameObject->addComponent(new BallComponent(p_gameObject, m_map));
 
         m_map->getLayer("GameObjects")->addGameObject(p_gameObject);
 
@@ -108,7 +108,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
         p_gameObject->setType(type);
 
         p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_paddleTexture));
-        p_gameObject->addComponent(new PaddleComponent(p_gameObject, m_map->findGameObjectByName("origin")->getPosition()));
+        p_gameObject->addComponent(new PaddleComponent(p_gameObject, m_map));
 
 		p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
 

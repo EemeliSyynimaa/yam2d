@@ -2,11 +2,12 @@
 
 #include "GameObject.h"
 #include "Box2D/Box2D.h"
+#include "Map.h"
 
 class PaddleComponent : public yam2d::Component, public yam2d::Updatable
 {
 public:
-    PaddleComponent(yam2d::GameObject* p_owner, const yam2d::vec2& origin);
+    PaddleComponent(yam2d::GameObject* p_owner, yam2d::TmxMap* p_map);
 
     void update(float deltaTime);
     void setScreenSize(int x, int y);
@@ -20,6 +21,5 @@ private:
     float m_angle;
     float m_screenW;
     float m_screenH;
-    int m_mouseX;
-    bool m_moved;
+    yam2d::TmxMap* m_map;
 };

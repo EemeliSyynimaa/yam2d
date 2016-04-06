@@ -16,18 +16,25 @@ public:
     void render();
 
 private:
+    void updateScore(int amount);
+    void updateLives(int amount);
+
     yam2d::Ref<yam2d::TmxMap> m_map;
+    yam2d::Ref<b2World> m_world;
     yam2d::Ref<ComponentFactory> m_componentFactory;
+    yam2d::Ref<CollisionHandler> m_collisionHandler;
+
     yam2d::Ref<yam2d::GameObject> m_ball;
     yam2d::Ref<yam2d::GameObject> m_paddle;
 	yam2d::Ref<yam2d::GameObject> m_scoreLabel;
-    yam2d::Ref<CollisionHandler> m_collisionHandler;
+    yam2d::Ref<yam2d::GameObject> m_livesLabel;
+    yam2d::Ref<yam2d::GameObject> m_gameOverLabel;
 
-	size_t m_score = 0;
+	size_t m_score;
+    size_t m_lives;
 
-    float m_zoom = 1.0f;
-	float m_speed = 192.0f;
-    float m_step = 1.0f / 20.0f;
-	
-	yam2d::Ref<b2World> m_world;
+    float m_zoom;
+    float m_step;
+
+    bool m_gameOver;
 };

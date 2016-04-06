@@ -7,10 +7,7 @@
 class ComponentFactory : public yam2d::DefaultComponentFactory
 {
 public:
-    ComponentFactory();
-
-	void setWorld(b2World* p_world) { m_world = p_world; }
-    void setMap(yam2d::TmxMap* p_map) { m_map = p_map; }
+    ComponentFactory(b2World* p_world, yam2d::TmxMap* p_map);
 
     yam2d::Component* createNewComponent(const std::string& type, yam2d::Entity* owner, const yam2d::PropertySet& properties);
     yam2d::Entity* createNewEntity(yam2d::ComponentFactory* componentFactory, const std::string& type, yam2d::Entity* parent, const yam2d::PropertySet& properties);

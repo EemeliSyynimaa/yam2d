@@ -4,6 +4,7 @@
 #include "Input.h"
 
 Game::Game() :
+    m_context(nullptr),
     m_sceneManager(this)
 {
 }

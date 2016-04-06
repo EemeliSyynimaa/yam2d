@@ -1,5 +1,10 @@
 #include "core/collisionhandler.h"
 
+CollisionHandler::CollisionHandler(yam2d::TmxMap* p_map) :
+    m_map(p_map)
+{
+}
+
 void CollisionHandler::BeginContact(b2Contact* contact)
 {
 	yam2d::GameObject* a = static_cast<yam2d::GameObject*>(contact->GetFixtureA()->GetBody()->GetUserData());
