@@ -24,6 +24,7 @@ private:
     yam2d::Ref<ComponentFactory> m_componentFactory;
     yam2d::Ref<CollisionHandler> m_collisionHandler;
 
+    yam2d::Ref<yam2d::GameObject> m_background;
     yam2d::Ref<yam2d::GameObject> m_ball;
     yam2d::Ref<yam2d::GameObject> m_paddle;
 	yam2d::Ref<yam2d::GameObject> m_scoreLabel;

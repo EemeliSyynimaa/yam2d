@@ -15,6 +15,7 @@ private:
     yam2d::Ref<yam2d::Texture> m_ballTexture;
     yam2d::Ref<yam2d::Texture> m_paddleTexture;
 	yam2d::Ref<yam2d::Texture> m_fontTexture;
+    yam2d::Ref<yam2d::Texture> m_bgGameTexture;
 	yam2d::Ref<yam2d::SpriteSheet> m_font;
 	yam2d::Ref<b2World> m_world;
     yam2d::Ref<yam2d::TmxMap> m_map;

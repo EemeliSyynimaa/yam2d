@@ -31,11 +31,16 @@ GameScene::GameScene(Game* p_game) :
     m_map->loadMapFile("assets/levels/testi.tmx", m_componentFactory);
     m_map->getCamera()->setPosition(m_map->findGameObjectByName("origin")->getPosition());
 
+    m_background = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Background", nullptr, yam2d::PropertySet()));
     m_paddle = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Paddle", nullptr, yam2d::PropertySet()));
     m_ball = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Ball", nullptr, yam2d::PropertySet()));
 	m_scoreLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
     m_livesLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
     m_gameOverLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
+
+    // Update screen size to ball and paddle. Their movement depend on the size of the screen.
+    m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
+    m_ball->getComponent<BallComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
 
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Score: " + std::to_string(m_score));
 	m_scoreLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
@@ -43,7 +48,7 @@ GameScene::GameScene(Game* p_game) :
 
     m_livesLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Lives: " + std::to_string(m_lives));
     m_livesLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 0.0f, 0.0f, 1.0f);
-    m_livesLabel->setPosition(m_map->findGameObjectByName("origin")->getPosition().x, 15.0f);
+    m_livesLabel->setPosition(m_map->findGameObjectByName("origin")->getPosition().x, 16.0f);
 
     m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("");
     m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 0.0f, 255.0f, 1.0f);
@@ -98,15 +103,11 @@ void GameScene::update(float deltaTime)
         if (m_map->getLayer("GameObjects")->getGameObjects().size() <= 5)
         {
             // We add extra points for remaining lives.
-            updateScore(m_lives * 500.0f);
+            updateScore(m_lives * 500);
             m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("YOU WIN");
             m_gameOver = true;
         }
     }
-
-    // Update screen size to ball and paddle. Their movement depend on the size of the screen.
-    m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
-    m_ball->getComponent<BallComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
 }
 
 void GameScene::render()

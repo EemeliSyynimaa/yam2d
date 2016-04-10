@@ -1,6 +1,6 @@
 #include "es_util.h"
 #include "core/game.h"
-#include "scenes/gamescene.h"
+#include "scenes/menuscene.h"
 
 Game* p_game;
 
@@ -8,7 +8,7 @@ bool init(yam2d::ESContext* p_context)
 {
     p_game = new Game();
     p_game->init(p_context);
-    p_game->getSceneManager()->change(new GameScene(p_game));
+    p_game->getSceneManager()->change(new MenuScene(p_game));
 
     return true;
 }
@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 {
     yam2d::ESContext context;
     yam2d::esInitContext(&context);
-    yam2d::esCreateWindow(&context, "Hexout", 720, 720, yam2d::ES_WINDOW_DEFAULT | yam2d::ES_WINDOW_RESIZEABLE);
+    yam2d::esCreateWindow(&context, "Hexout", 750, 750, yam2d::ES_WINDOW_DEFAULT);
 
     yam2d::esRegisterInitFunc(&context, init);
     yam2d::esRegisterDeinitFunc(&context, deinit);

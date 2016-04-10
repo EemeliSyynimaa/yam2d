@@ -15,11 +15,14 @@ ComponentFactory::ComponentFactory(b2World* p_world, yam2d::TmxMap* p_map) :
     m_ballTexture(new yam2d::Texture("assets/textures/ball.png")),
     m_paddleTexture(new yam2d::Texture("assets/textures/paddle.png")),
     m_fontTexture(new yam2d::Texture("assets/textures/Fixedsys_24_Bold.png")),
+    m_bgGameTexture(new yam2d::Texture("assets/textures/background_game.png")),
     m_font(yam2d::SpriteSheet::autoFindFontFromTexture(m_fontTexture, "assets/fonts/Fixedsys_24_Bold.dat")),
     m_world(p_world),
     m_map(p_map)
 {
 	m_ballTexture->setTransparentColor(255, 0, 255);
+
+    m_map->addLayer(yam2d::TmxMap::BACKGROUND0, new yam2d::Layer(m_map, "Background", 1.0f, true, false));
 }
 
 yam2d::Component* ComponentFactory::createNewComponent(const std::string& type, yam2d::Entity* p_owner, const yam2d::PropertySet& properties)
@@ -148,6 +151,19 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
 
 		return p_gameObject;
 	}
+    else if (type == "Background")
+    {
+        yam2d::GameObject* p_gameObject = new yam2d::GameObject(nullptr, 0);
+        p_gameObject->setType(type);
+
+        p_gameObject->addComponent(new yam2d::SpriteComponent(p_gameObject, m_bgGameTexture));
+        p_gameObject->getComponent<yam2d::SpriteComponent>()->setRenderingEnabled(true);
+        p_gameObject->setPosition(m_map->findGameObjectByName("origin")->getPosition());
+
+        m_map->getLayer("Background")->addGameObject(p_gameObject);
+
+        return p_gameObject;
+    }
 
     return yam2d::DefaultComponentFactory::createNewEntity(p_componentFactory, type, p_parent, properties);
 }
