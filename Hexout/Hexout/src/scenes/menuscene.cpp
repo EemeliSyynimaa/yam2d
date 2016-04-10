@@ -23,6 +23,8 @@ MenuScene::MenuScene(Game* p_game) :
 
     m_startgame->setPosition(yam2d::vec2(3.7f, 3.0f));
     m_quitgame->setPosition(yam2d::vec2(3.7f, 4.5f));
+    m_startgame->setName("StartGame");
+    m_quitgame->setName("QuitGame");
 
     m_map->getLayer("Background")->addGameObject(m_background);
     m_map->getLayer("GUI")->addGameObject(m_startgame);
@@ -36,26 +38,35 @@ MenuScene::~MenuScene()
 
 void MenuScene::update(float deltaTime)
 {
-    if (yam2d::isKeyPressed(yam2d::KEY_UP))
+    float mouseX = static_cast<float>(yam2d::getMouseAxisX());
+    float mouseY = static_cast<float>(yam2d::getMouseAxisY());
+
+    yam2d::vec2 mouseInMap = m_map->screenToMapCoordinates(mouseX, mouseY);
+
+    yam2d::GameObject* pickedObject = m_map->getLayer("GUI")->pick(mouseInMap);
+
+    if (pickedObject)
     {
-        if (m_selected == 0) 
-            m_selected = 1;
-        else 
+        if (pickedObject->getName() == "StartGame")
+        {
             m_selected = 0;
-    }
-    if (yam2d::isKeyPressed(yam2d::KEY_DOWN))
-    {
-        if (m_selected == 1) 
-            m_selected = 0;
-        else 
+        }
+        else if (pickedObject->getName() == "QuitGame")
+        {
             m_selected = 1;
+        }
+
+        if (yam2d::isMouseButtonPressed(yam2d::MOUSE_LEFT))
+        {
+            if (m_selected == 0)
+                m_game->getSceneManager()->change(new GameScene(m_game));
+            else if (m_selected == 1)
+                m_game->getContext()->quitFlag = true;
+        }
     }
-    if (yam2d::isKeyPressed(yam2d::KEY_SPACE))
+    else
     {
-        if (m_selected == 0)
-            m_game->getSceneManager()->change(new GameScene(m_game));
-        else
-            m_game->getContext()->quitFlag = true;
+        m_selected = 2;
     }
 }
 
@@ -66,10 +77,15 @@ void MenuScene::render()
         m_startgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 0.0f, 1.0f);
         m_quitgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
     }
-    else
+    else if (m_selected == 1)
     {
         m_startgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
         m_quitgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 0.0f, 1.0f);
+    }
+    else
+    {
+        m_startgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
+        m_quitgame->getComponent<yam2d::SpriteComponent>()->setColor(255.0f, 255.0f, 255.0f, 1.0f);
     }
 
     m_map->getCamera()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);

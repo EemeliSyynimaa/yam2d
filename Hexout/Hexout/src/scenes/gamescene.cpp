@@ -1,4 +1,5 @@
 #include "scenes/gamescene.h"
+#include "scenes/menuscene.h"
 
 #include "es_util.h"
 #include "Camera.h"
@@ -12,6 +13,7 @@
 #include "components/ballcomponent.h"
 #include "Box2D/Box2D.h"
 
+#include <algorithm>
 #include <iostream>
 
 GameScene::GameScene(Game* p_game) : 
@@ -21,7 +23,8 @@ GameScene::GameScene(Game* p_game) :
     m_componentFactory(new ComponentFactory(m_world, m_map)),
     m_collisionHandler(new CollisionHandler(m_map)),
     m_score(0),
-    m_lives(3),
+    m_lives(5),
+    m_tiles(0),
     m_zoom(0.0f),
     m_step(1.0f / 20.0f),
     m_gameOver(false)
@@ -37,6 +40,7 @@ GameScene::GameScene(Game* p_game) :
 	m_scoreLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
     m_livesLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
     m_gameOverLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
+    m_backToMenuLabel = static_cast<yam2d::GameObject*>(m_componentFactory->createNewEntity(m_componentFactory, "Label", nullptr, yam2d::PropertySet()));
 
     // Update screen size to ball and paddle. Their movement depend on the size of the screen.
     m_paddle->getComponent<PaddleComponent>()->setScreenSize(m_game->getContext()->width, m_game->getContext()->height);
@@ -53,6 +57,14 @@ GameScene::GameScene(Game* p_game) :
     m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("");
     m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 0.0f, 255.0f, 1.0f);
     m_gameOverLabel->setPosition(m_map->findGameObjectByName("origin")->getPosition().x, -1.0f);
+
+    m_backToMenuLabel->getComponent<yam2d::TextComponent>()->getText()->setText("");
+    m_backToMenuLabel->getComponent<yam2d::TextComponent>()->getText()->setColor(255.0f, 255.0f, 0.0f, 1.0f);
+    m_backToMenuLabel->setPosition(m_map->findGameObjectByName("origin")->getPosition().x, 12.0f);
+
+    m_tiles = getNumberOfGameObjectsOfType("HexTile");
+
+    std::cout << m_tiles << std::endl;
 }
 
 GameScene::~GameScene()
@@ -79,6 +91,18 @@ void GameScene::update(float deltaTime)
 
             // Player gets score based on destroyed tiles.
             updateScore(deadObjects * 100);
+
+            m_tiles -= deadObjects;
+
+            // Checks if the tiles are destroyed.
+            if (m_tiles == 0)
+            {
+                // We add extra points for remaining lives.
+                updateScore(m_lives * 500);
+                m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("YOU WIN");
+                m_backToMenuLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Press left mouse button");
+                m_gameOver = true;
+            }
         }
 
         // Check if the ball is dead.
@@ -88,6 +112,7 @@ void GameScene::update(float deltaTime)
             if (m_lives == 0)
             {
                 m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("YOU LOSE");
+                m_backToMenuLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Press left mouse button");
                 m_gameOver = true;
             }
             // Ball is dead but we still have some lives left. Decrease lives and revive the ball.
@@ -97,16 +122,11 @@ void GameScene::update(float deltaTime)
                 m_ball->getComponent<BallComponent>()->revive();
             }
         }
+    }
 
-        // Checks if the tiles are destroyed. 5 is the magic number of other objects (m_ball, m_paddle etc.) so if the
-        // amount of gameobjects go below that all the tiles must have been destroyed.
-        if (m_map->getLayer("GameObjects")->getGameObjects().size() <= 5)
-        {
-            // We add extra points for remaining lives.
-            updateScore(m_lives * 500);
-            m_gameOverLabel->getComponent<yam2d::TextComponent>()->getText()->setText("YOU WIN");
-            m_gameOver = true;
-        }
+    if (m_gameOver && yam2d::isMouseButtonPressed(yam2d::MOUSE_LEFT))
+    {
+        m_game->getSceneManager()->change(new MenuScene(m_game));
     }
 }
 
@@ -126,4 +146,12 @@ void GameScene::updateLives(int amount)
 {
     m_lives += amount;
     m_livesLabel->getComponent<yam2d::TextComponent>()->getText()->setText("Lives: " + std::to_string(m_lives));
+}
+
+size_t GameScene::getNumberOfGameObjectsOfType(const std::string& type)
+{
+    return std::count_if(std::begin(m_map->getLayer("GameObjects")->getGameObjects()), std::end(m_map->getLayer("GameObjects")->getGameObjects()), [&type](yam2d::GameObject* gameObject)
+    {
+        return (gameObject->getType() == type);
+    });
 }

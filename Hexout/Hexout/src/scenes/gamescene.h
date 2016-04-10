@@ -19,6 +19,8 @@ private:
     void updateScore(int amount);
     void updateLives(int amount);
 
+    size_t getNumberOfGameObjectsOfType(const std::string& type);
+
     yam2d::Ref<yam2d::TmxMap> m_map;
     yam2d::Ref<b2World> m_world;
     yam2d::Ref<ComponentFactory> m_componentFactory;
@@ -30,9 +32,11 @@ private:
 	yam2d::Ref<yam2d::GameObject> m_scoreLabel;
     yam2d::Ref<yam2d::GameObject> m_livesLabel;
     yam2d::Ref<yam2d::GameObject> m_gameOverLabel;
+    yam2d::Ref<yam2d::GameObject> m_backToMenuLabel;
 
 	size_t m_score;
     size_t m_lives;
+    size_t m_tiles;
 
     float m_zoom;
     float m_step;

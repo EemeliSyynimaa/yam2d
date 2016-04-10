@@ -35,6 +35,7 @@ yam2d::Entity* ComponentFactory::createNewEntity(yam2d::ComponentFactory* p_comp
     if (type == "HexTile")
     {
         yam2d::GameObject* p_gameObject = new yam2d::GameObject(p_parent, properties);
+        p_gameObject->setType(type);
 
         p_gameObject->addComponent(p_componentFactory->createNewComponent("Tile", p_gameObject, properties));
 
